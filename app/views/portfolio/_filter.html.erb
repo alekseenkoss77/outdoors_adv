@@ -1,0 +1,8 @@
+<div class="portfolio-filter">
+  <a href="/portfolio" class="<%= current_page?("/portfolio") ? 'portfolio-active-filter' : '' %>">Все работы</a>
+  <% Service.all.each do |service| %>
+    <a href="/portfolio/<%= service.id %>" class="<%= current_page?("/portfolio/#{service.id}") ? 'portfolio-active-filter' : '' %>">
+      <%= service.title %>
+    </a>
+  <% end %>
+</div>

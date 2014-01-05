@@ -1,0 +1,47 @@
+<%= meta_title("Как нас найти | наружная реклама в Томске POSTER") %>
+<%= meta_description("Вы можете найти нас следуя карте на этой странице. Мы производим качественную рекламу. | наружная реклама в Томске POSTER") %>
+<%= meta_keywords("контакты, адрес, телефон компании") %>
+
+<%= content_for :header do %>
+    <div class="vg-aboutus-text">
+      <div class="vg-header">Контакты</div>
+      <p class="header-text">
+        Вы можете найти нас по адресу: <br/>
+        <strong>г. Томск, ул. Ленина 151/1, 3 эт.</strong><br/><br/>
+        Тел.: <strong> 8 (3822) 93-83-96 </strong><br/>
+        Skype: <span>poster-tomsk</span>
+        E-mail: <strong>poster.tomsk@gmail.com</strong>
+      </p>
+    </div>
+<% end %>
+<div class="clearfix"></div>
+<div class="portfolio-page">
+    <div class="order">
+      <div class="vg-item-article a-left vg-btn-height">
+        <h3 class="vg-categories-icon vg-margin-1">Связаться с нами</h3>
+        <%= form_for @order do |f| %>
+            <p>
+              <%= f.label :name, "Ваше имя *" %><br/>
+              <%= f.text_field :name %>
+            </p>
+            <p>
+              <%= f.label :phone, "Контактный телефон *" %><br/>
+              <%= f.text_field :phone %>
+            </p>
+            <p>
+              <%= f.label :email, "E-mail (необязательно)" %><br/>
+              <%= f.text_field :email %>
+            </p>
+            <p>
+              <%= f.label :message, "Сообщение" %><br/>
+              <%= f.text_area :message %>
+            </p>
+            <%= f.submit "→ Отправить Сообщение", class: "vg-link-button-big-2" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="map">
+      <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=I8HCfLQtKJTj_VL0c-VwtTmHNaA_NnPV&width=610&height=450"></script>
+    </div>
+  <div class="clearfix"></div>
+</div>

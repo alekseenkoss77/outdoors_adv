@@ -1,0 +1,58 @@
+<%= content_for :head do %>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?102"></script>
+    <script type="text/javascript">
+        VK.init({apiId: 3998134, onlyWidgets: true});
+    </script>
+<% end %>
+
+<%= meta_title(@post.meta_title) %>
+<%= meta_description(@post.meta_description) %>
+<%= meta_keywords(@post.meta_keywords) %>
+
+<%= content_for :header do %>
+    <div class="vg-aboutus-text">
+      <div class="vg-header"><%= @post.title %></div>
+      <p class="header-text">
+        <%= @post.summary %>
+      </p>
+    </div>
+<% end %>
+
+<article class="border-top c-two vg-left-bar vg-table-display vg-blog-bar">
+  <%= render 'tags' %>
+  <div class="vg-item-article a-left vg-btn-height">
+    <h3 class="vg-categories-icon vg-margin-1">Категории услуг</h3>
+    <% Service.all.each do |service| %>
+        <a href="<%= service_path service.slug %>" class="vg-page">
+          » <%= service.title %>
+        </a>
+    <% end %>
+  </div>
+
+  <%= render 'shared/social_sidebar' %>
+</article>
+
+<article class="border-top border-left c-four vg-table-display vg-blog-posts">
+  <div class="content-body"><%= raw @post.body %></div>
+  <div class="after-topic">
+      <div class="tags">
+        <span>Тэги: </span><%= raw @post.tag_list.map {|tag| link_to tag, posts_path(tag) }.join(", ") %>
+      </div>
+      <div class="likes">
+          <div id="vk_like"></div>
+          <script type="text/javascript">
+              VK.Widgets.Like("vk_like", {type: "button"});
+          </script>
+      </div>
+      <div class="likes">
+        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=false&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+      </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="vk_comments"></div>
+  <script type="text/javascript">
+      VK.Widgets.Comments("vk_comments", {limit: 5, width: "520", attach: "*"});
+  </script>
+  <div class="clearfix"></div>
+</article>

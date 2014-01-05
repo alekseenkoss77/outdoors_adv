@@ -1,0 +1,8 @@
+<div class="vg-item-article a-left vg-btn-height">
+  <h3 class="vg-categories-icon vg-margin-1">Облако тэгов</h3>
+  <ul id="tag_cloud">
+    <% tag_cloud Post.tag_counts, %w{s m l} do |tag, css_class| %>
+        <li><%= link_to tag.name, posts_path(tag: tag.name), class: css_class %></li>
+    <% end %>
+  </ul>
+</div>

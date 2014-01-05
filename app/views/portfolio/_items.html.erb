@@ -1,0 +1,23 @@
+<% if @items.any? %>
+    <div class="clearfix"></div>
+    <div class="vg-latest-projects" style="margin-top: 25px;">
+    <% @items.each do |item| %>
+      <article class="border-left border-bottom border-top c-two vg-portfolio-item" style="background-image:url(<%= item.attachments.first.attach.url(:small) if item.attachments.any? %>)">
+        <div class="vg-background" style="opacity: 0;">
+          <h4>
+            <a class="fancy" href="<%= item.attachments.first.attach.url(:gallery) if item.attachments.any? %>" style="color:#fff;"><%= item.title %></a>
+          </h4>
+          <div class="vg-subtitle a-center">
+          </div>
+          <p class="vg-port">
+            <a class="fancy" rel="gallery" href="<%= item.attachments.first.attach.url(:gallery) if item.attachments.any? %>">
+              Посмотреть
+                <span class="vg-icon">→
+                </span>
+            </a>
+          </p>
+        </div>
+      </article>
+    <% end %>
+    </div>
+<% end %>

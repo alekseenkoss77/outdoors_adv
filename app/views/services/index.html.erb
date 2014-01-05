@@ -1,0 +1,47 @@
+<%= meta_title("Услуги по производству наружной рекламы | POSTER") %>
+<%= meta_description("Стенды, таблички, штендеры, фотобаннеры и многое другое! Мы создаем качественную рекламу для Вас!") %>
+<%= meta_keywords("стенды, таблички, штендеры, фотобаннеры, роллапы, ремонт рекламы") %>
+
+<%= content_for :header do %>
+    <div class="vg-aboutus-text">
+      <div class="vg-header">Услуги</div>
+      <p class="header-text">
+        Ниже представлен список услуг нашей компании по производству рекламных материалов.
+        Если Вам нужны стенды, таблички, стойки, пресс-воллы, брендирование, то Вы по адресу!
+      </p>
+    </div>
+<% end %>
+
+<article class="border-top c-two vg-left-bar vg-table-display vg-blog-bar">
+    <%= render 'shared/social_sidebar' %>
+</article>
+
+
+<article class="border-top border-left c-four vg-table-display vg-blog-posts">
+  <% @services.each do |service| %>
+      <article class="border-top c-two vg-intro-post">
+        <div class="vg-item-article a-right">
+          <a href="<%= service_path(service.slug) %>">
+          <img src="<%= service.icon.url if service.icon %>" height="42" width="50" style="padding: 10px;
+                  background: #0BBCD3;">
+          </a>
+          <h3>
+            <a href="<%= service_path(service.slug) %>"><%= service.title %></a>
+          </h3>
+          <div class="vg-subtitle">
+            <!--<a href="/portfolio/<%#= service.id %>"><span class="vg-icon">→</span>В портфолио</a>-->
+          </div>
+        </div>
+      </article>
+      <article class="border-top c-two vg-overflow vg-margin-2">
+        <div class="vg-item-article">
+          <p class="vg-intro-text">
+            <%= service.summary %><br/><br/>
+
+            <a href="<%= service_path(service.slug) %>" class="vg-readmore f-right">
+              Перейти <span class="vg-icon">→</span></a>
+          </p>
+        </div>
+      </article>
+  <% end %>
+</article>

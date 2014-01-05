@@ -1,0 +1,25 @@
+<% if @slides.any? %>
+    <div class="vg-slideshow">
+      <% @slides.each do |slide| %>
+      <div class="vg-slide" style="background-image: url(<%= slide.photo.url(:slide) if slide.photo %>); display: none;">
+        <div class="vg-caption-container">
+          <div class="vg-caption">
+            <%= slide.title %>
+          </div>
+          <div class="vg-subcaption" style="text-align:right;">
+            <a <%= raw slide.url %> class="vg-readmore">Подробнее
+            <span class="vg-icon">→
+            </span></a>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="slidetabs">
+        <% @slides.map(&:id).each do |sid, index| %>
+          <a href="#" class="<%= index == 0 ? 'current' : '' %>"></a>
+        <% end %>
+      </div>
+
+    </div>
+<% end %>

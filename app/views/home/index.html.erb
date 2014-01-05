@@ -1,0 +1,60 @@
+<%= meta_title("Наружная реклама в Томске | POSTER") %>
+<%= meta_keywords("Наружная реклама, наружка, стенды, таблички, штендеры, изготовление рекламы") %>
+<%= meta_description("Изготовление рекламных конструкций в Томске. Вся наружная реклама у нас! Мы любим своих клиентов :)") %>
+
+<%= render 'shared/mainmenu' %>
+
+<div class="border-right border-bottom">
+  <%= render 'shared/slider' %>
+</div>
+
+<div class="clearfix"></div>
+<div class="main-text">
+  <h1>ProstOR, когда реклама - это просто!</h1>
+  <p>
+    Кто сказал, что изготовление наружной рекламы - это сложно?<br/> Когда заказ попадает в руки профессионалов, клиенту просто остается ждать отличного результата!
+    <br/>Специалисты компании "ProstOR" делают процесс заказа и производства любых видов наружной рекламы максимально простым и доступным каждому клиенту.
+    Нужна наружная реклама?<br/> Обратитесь в "ProstOR"! Это просто!
+  </p>
+</div>
+
+<% if @items.any? %>
+<div class="vg-latest-projects">
+  <article class="c-two">
+      <div class="vg-item-article">
+        <h2 class="vg-portfolio-title" style="font-size: 30px;
+                width: 300px;">Последние работы</h2>
+        <div class="vg-subtitle-portfolio" style="width: 400px;">
+          Недавно добавленные объекты
+        </div>
+      </div>
+  </article>
+  <div class="clearfix"></div>
+
+  <% @items.each do |item| %>
+    <% if item.attachments.any? %>
+      <article class="border-left border-bottom border-top c-two vg-portfolio-item"
+               style="background-image:url(<%= item.attachments.first.attach.url(:small) %>)">
+      <div class="vg-background" style="opacity: 0;">
+        <h4>
+          <a class="fancy" href="<%= item.attachments.first.attach.url(:gallery) %>" style="color:#fff;"><%= item.title %></a>
+        </h4>
+        <div class="vg-subtitle a-center">
+
+        </div>
+
+        <p class="vg-port">
+          <a class="fancy" rel="gallery" href="<%= item.attachments.first.attach.url(:gallery) %>">
+            Посмотреть
+            <span class="vg-icon">→
+            </span>
+          </a>
+        </p>
+      </div>
+      </article>
+    <% end %>
+  <% end %>
+</div>
+<% end %>
+
+

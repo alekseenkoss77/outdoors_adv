@@ -1,0 +1,89 @@
+<%= meta_title(@service.meta_title) %>
+<%= meta_description(@service.meta_description) %>
+<%= meta_keywords(@service.meta_keywords) %>
+
+<%= content_for :header do %>
+<div class="vg-aboutus-text">
+  <div class="vg-header"><%= @service.title %></div>
+  <p class="header-text">
+    <%= @service.summary %>
+  </p>
+  <a href="#orderform" class="vg-link-button-big">Заказать<span class="vg-icon">→
+    </span></a>
+</div>
+<% end %>
+
+
+<article class="border-top c-two vg-left-bar vg-table-display vg-blog-bar">
+  <div class="vg-item-article a-left vg-btn-height">
+    <h3 class="vg-categories-icon vg-margin-1">Категории услуг</h3>
+    <% Service.all.each do |service| %>
+        <a href="<%= service_path service.slug %>" class="vg-page">
+          » <%= service.title %>
+        </a>
+    <% end %>
+  </div>
+
+  <%= render 'shared/social_sidebar' %>
+</article>
+
+<article class="border-top border-left c-four vg-table-display vg-blog-posts">
+  <div class="content-body"><%= raw @service.body %></div>
+
+  <% if @service.attachments.any? %>
+    <h2>Примеры</h2>
+    <div class="content-page-images">
+    <% @service.attachments.each do |at| %>
+        <article class="border-left border-bottom border-top c-two vg-portfolio-item"
+                 style="background-image:url(<%= at.attach.url(:small) %>)">
+          <div class="vg-background" style="opacity: 0;">
+            <h4>
+              <a class="fancy"  href="<%= at.attach.url(:gallery) %>" style="color:#fff;"><%= at.title %></a>
+            </h4>
+            <div class="vg-subtitle a-center">
+
+            </div>
+
+            <p class="vg-port">
+              <a class="fancy" rel="gallery" href="<%= at.attach.url(:gallery) %>">
+                Посмотреть
+            <span class="vg-icon">→
+            </span>
+              </a>
+            </p>
+          </div>
+        </article>
+    <% end %>
+  </div>
+  <% end %>
+  <div class="clearfix"></div>
+  <div class="content-body order" id="orderform">
+    <h2 style="padding: 0px;">Оформить заказ</h2>
+    <%= form_for @order do |f| %>
+        <% @order.errors.full_messages.each do |msg| %>
+            <p><%= msg %></p>
+        <% end %>
+        <%= f.hidden_field :service_id, :value => @order.id %>
+        <div class="main-order-fields">
+          <%= f.label :name, "Ваше Имя*" %><br/>
+          <%= f.text_field :name %>
+        </div>
+        <div class="main-order-fields">
+          <%= f.label :phone, "Ваш телефон*" %><br/>
+          <%= f.text_field :phone %>
+        </div>
+        <div class="main-order-fields">
+          <%= f.label :email, "Ваш E-mail" %><br/>
+          <%= f.text_field :email %>
+        </div>
+        <div class="clearfix"></div>
+        <div class="order-textarea">
+          <%= f.label :message, "Сообщение" %> <br/>
+          <%= f.text_area :message %>
+        </div>
+        <%= f.submit "→ Заказать", class: "vg-link-button-big-2" %>
+    <% end %>
+  </div>
+
+</article>
+

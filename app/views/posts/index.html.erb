@@ -1,0 +1,61 @@
+<%= meta_title("Блог о наружной рекламе и маркетинге | ProstOR, Томск ") %>
+<%= meta_description("Что такое наружная реклама? Как наружная реклама помогает бизнесу? Подписывайся и читай, узнай все самое интересное о наружке :)") %>
+<%= meta_keywords("Наружка, блог, статьи о рекламе, реклама в Томске") %>
+
+<%= content_for :header do %>
+    <div class="vg-aboutus-text">
+      <div class="vg-header">Блог о рекламе</div>
+      <p class="header-text">
+        На этой странице Вас ждут последние статьи, новости, обзоры из области наружной рекламы,
+        бизнеса и маркетинга.
+      </p>
+    </div>
+<% end %>
+
+<article class="border-top c-two vg-left-bar vg-table-display vg-blog-bar">
+  <%= render 'tags' %>
+  <div class="vg-item-article a-left vg-btn-height">
+    <h3 class="vg-categories-icon vg-margin-1">Категории услуг</h3>
+    <% Service.all.each do |service| %>
+        <a href="<%= service_path service.slug %>" class="vg-page">
+          » <%= service.title %>
+        </a>
+    <% end %>
+  </div>
+
+  <%= render 'shared/social_sidebar' %>
+</article>
+
+<article class="border-top border-left c-four vg-table-display vg-blog-posts">
+  <% @posts.each do |post| %>
+      <article class="border-top c-two vg-intro-post">
+        <div style="margin: 40px 15px;" class="vg-item-article a-right">
+          <a href="<%= post_path(post.slug) %>">
+            <img src="<%= post.attachments.first.attach.url(:small) if post.attachments.any? %>" height="52" width="60" style="padding: 3px;
+                    background: #0BBCD3;">
+          </a>
+          <h3>
+            <a href="<%= post_path(post.slug) %>"><%= post.title %></a>
+          </h3>
+          <div class="vg-subtitle">
+            <br/><span style="font-size: 13px; font-style: italic;"><%= Russian::strftime(post.updated_at, "%d %B %Y") %></span>
+            <!--<a href="/portfolio/<%#= post.id %>"><span class="vg-icon">→</span>В портфолио</a>-->
+            <div class="post-tags-i">
+              <span>Тэги: </span><%= raw post.tag_list.map {|tag| link_to tag, posts_path(tag: tag) }.join(", ") %>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="border-top c-two vg-overflow vg-margin-2" >
+        <div class="vg-item-article" >
+          <p class="vg-intro-text">
+            <%= post.summary %><br/><br/>
+
+            <a href="<%= post_path(post.slug) %>" class="vg-readmore f-right">
+              Читать далее <span class="vg-icon">→</span></a>
+          </p>
+        </div>
+      </article>
+  <% end %>
+</article>
+

@@ -1,0 +1,10 @@
+<%= content_for :header do %>
+    <ul class="ico-menu">
+      <% Service.all.each do |service| %>
+        <li>
+          <a href="<%= service_path(service.slug) %>"><%= image_tag service.icon.url %></a><br/>
+          <%= link_to service.title, service_path(service.slug), class: "icon-menu-a"  %>
+        </li>
+      <% end %>
+    </ul>
+<% end %>
